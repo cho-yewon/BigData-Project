@@ -13,7 +13,7 @@
 |---|---|
 | **유기·입양 동물 데이터** | 농림축산식품부 농림축산검역본부 [국가동물보호정보시스템_유기동물 조회 서비스 Open API (JSON/XML)](https://www.data.go.kr/data/15098931/openapi.do) |
 | **보호소 위치 및 현황** | 농림축산식품부 [전국동물보호센터 정보표준데이터 Open API (JSON/XML)](https://www.data.go.kr/data/15025454/standard.do) |
-| **인천시 반려동물 등록 현황** | 인천광역시 [반려동물 보유 및 등록 현황 CSV (data.go.kr)](https://www.data.go.kr/data/15066067/fileData.do) |
+| **인천시 반려동물 등록 현황** | 인천광역시 [반려동물 보유 및 등록 현황 Open API (JSON/XML)](https://www.data.go.kr/data/15066067/openapi.do) |
 
 ---
 
@@ -22,12 +22,13 @@
 ### 1️⃣ 데이터 수집 / 크롤링
 - [농림축산식품부 국가동물보호정보시스템 Open API](https://www.data.go.kr/data/15098931/openapi.do)를 이용해 **인천시 유기·입양 동물 데이터 수집**  
 - [전국동물보호센터 정보표준데이터 Open API](https://www.data.go.kr/data/15025454/standard.do)를 이용해 **보호소 위치 및 현황 데이터 수집**  
-- [인천광역시 반려동물 보유 및 등록 현황 CSV](https://www.data.go.kr/data/15066067/fileData.do)를 다운로드하여 **등록 현황 데이터 확보**
+- [인천광역시 반려동물 보유 및 등록 현황 Open API](https://www.data.go.kr/data/15066067/openapi.do)를 이용해 **등록 현황 데이터 자동 수집**
 
-### 2️⃣ 데이터 저장/추출
-- 수집한 데이터를 MySQL 또는 MongoDB에 저장하여 통합 관리  
-- Google BigQuery와 연동해 대용량 데이터 추출 및 쿼리  
-- 주기적 업데이트를 위한 스크립트 구성
+### 2️⃣ 데이터 저장 / 추출
+- 수집한 모든 데이터를 **MongoDB**에 통합 저장  
+- 각 데이터셋(유기·입양 / 보호소 / 등록현황)을 **개별 컬렉션(collection)** 으로 구분 관리  
+- MongoDB는 JSON 구조를 그대로 저장하므로, Open API의 응답 형식을 변환 없이 활용 가능  
+- 데이터베이스 구조 예시  
 
 ### 3️⃣ 데이터 가공/정제
 - Pandas를 활용해 데이터 결측치·이상치 처리  
